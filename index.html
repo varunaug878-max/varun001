@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" class="h-full bg-slate-950">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GymFlow | Workout Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                400: '#38bdf8',
+                500: '#0ea5e9'
+              }
+            },
+            boxShadow: {
+              glow: '0 0 0 1px rgba(56, 189, 248, 0.3), 0 0 32px rgba(14, 165, 233, 0.15)'
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: 0, transform: 'translateY(12px)' },
+                '100%': { opacity: 1, transform: 'translateY(0px)' }
+              }
+            },
+            animation: {
+              fadeInUp: 'fadeInUp 400ms ease-out forwards'
+            }
+          }
+        }
+      };
+    </script>
+  </head>
+  <body class="h-full bg-slate-950 text-slate-100 antialiased">
+    <div id="root" class="min-h-full"></div>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
