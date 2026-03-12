@@ -1,40 +1,195 @@
 <!doctype html>
-<html lang="en" class="h-full bg-slate-950">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GymFlow | Workout Tracker</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Responsive Calculator</title>
+    <style>
+      :root {
+        --bg: #0f172a;
+        --panel: #111827;
+        --text: #f8fafc;
+        --muted: #94a3b8;
+        --operator: #2563eb;
+        --operator-hover: #1d4ed8;
+        --accent: #e11d48;
+        --accent-hover: #be123c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Arial, Helvetica, sans-serif;
+        background: radial-gradient(circle at top, #1e293b, var(--bg) 60%);
+        color: var(--text);
+        padding: 1rem;
+      }
+
+      .calculator {
+        width: min(420px, 100%);
+        background: rgba(17, 24, 39, 0.95);
+        border-radius: 1rem;
+        padding: 1rem;
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+      }
+
+      .display {
+        width: 100%;
+        min-height: 84px;
+        border: none;
+        border-radius: 0.75rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        font-size: clamp(1.5rem, 2.5vw, 2rem);
+        text-align: right;
+        color: var(--text);
+        background: #020617;
+      }
+
+      .buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 0.75rem;
+        padding: 1rem;
+        font-size: 1.1rem;
+        font-weight: 700;
+        background: #334155;
+        color: var(--text);
+        cursor: pointer;
+        transition: transform 0.15s ease, filter 0.15s ease;
+      }
+
+      button:hover {
+        filter: brightness(1.1);
+      }
+
+      button:active {
+        transform: translateY(1px) scale(0.98);
+      }
+
+      .operator {
+        background: var(--operator);
+      }
+
+      .operator:hover {
+        background: var(--operator-hover);
+      }
+
+      .clear {
+        background: var(--accent);
+      }
+
+      .clear:hover {
+        background: var(--accent-hover);
+      }
+
+      .equals {
+        background: #0f766e;
+      }
+
+      .equals:hover {
+        background: #0d9488;
+      }
+
+      @media (max-width: 420px) {
+        button {
+          padding: 0.9rem;
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="calculator">
+      <input id="display" class="display" type="text" value="0" readonly />
+
+      <section class="buttons" aria-label="Calculator keypad">
+        <button class="clear" data-action="clear">C</button>
+        <button class="operator" data-value="/">/</button>
+        <button class="operator" data-value="*">*</button>
+        <button class="operator" data-value="-">-</button>
+
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button class="operator" data-value="+">+</button>
+
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button class="equals" data-action="equals">=</button>
+
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button data-value="0">0</button>
+      </section>
+    </main>
+
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              brand: {
-                400: '#38bdf8',
-                500: '#0ea5e9'
-              }
-            },
-            boxShadow: {
-              glow: '0 0 0 1px rgba(56, 189, 248, 0.3), 0 0 32px rgba(14, 165, 233, 0.15)'
-            },
-            keyframes: {
-              fadeInUp: {
-                '0%': { opacity: 0, transform: 'translateY(12px)' },
-                '100%': { opacity: 1, transform: 'translateY(0px)' }
-              }
-            },
-            animation: {
-              fadeInUp: 'fadeInUp 400ms ease-out forwards'
-            }
+      const display = document.getElementById('display');
+      const keypad = document.querySelector('.buttons');
+
+      let expression = '';
+
+      const updateDisplay = (text) => {
+        display.value = text || '0';
+      };
+
+      const safeEvaluate = (exp) => {
+        if (!/^[0-9+\-*/\s.]+$/.test(exp)) {
+          return null;
+        }
+        try {
+          // eslint-disable-next-line no-new-func
+          const result = Function(`"use strict"; return (${exp})`)();
+          if (typeof result !== 'number' || !Number.isFinite(result)) {
+            return null;
           }
+          return result;
+        } catch {
+          return null;
         }
       };
+
+      keypad.addEventListener('click', (event) => {
+        const button = event.target.closest('button');
+        if (!button) return;
+
+        const { value, action } = button.dataset;
+
+        if (action === 'clear') {
+          expression = '';
+          updateDisplay('0');
+          return;
+        }
+
+        if (action === 'equals') {
+          const result = safeEvaluate(expression);
+          if (result === null) {
+            expression = '';
+            updateDisplay('Error');
+            return;
+          }
+          expression = String(result);
+          updateDisplay(expression);
+          return;
+        }
+
+        expression += value;
+        updateDisplay(expression);
+      });
     </script>
-    <script type="module" src="./main.js"></script>
-  </head>
-  <body class="h-full bg-slate-950 text-slate-100 antialiased">
-    <div id="root" class="min-h-full"></div>
-    <script type="module" src="main.js"></script>
   </body>
 </html>
