@@ -50,3 +50,8 @@ This project is a plain static site (no bundler required).
 - Publish directory: `.`
 
 `netlify.toml` already publishes the repository root and redirects `/` to `login.html`.
+
+
+## Merge-Conflict Troubleshooting
+
+If GitHub shows merge conflicts in `README.md`, `index.html`, `login.html`, or `signup.html`, keep the latest versions from this branch and remove all Git conflict marker lines before committing.
