@@ -21,7 +21,7 @@ A minimal black-themed monthly expense tracker website built with HTML, CSS, and
 - `budget.html`
 - `settings.html`
 
-## Run
+## Run Locally
 
 Use any static server, for example:
 
@@ -35,13 +35,18 @@ Then open:
 
 ## Netlify Deployment
 
-This app is a static site and does not require a bundler build.
+This project is a plain static site (no bundler required).
 
-- `netlify.toml` publishes the repository root (`.`) and redirects `/` to `login.html`.
-- No build command is required because this is a plain static HTML/CSS/JS site.
-
-If your Netlify UI has old settings, update them to:
+### Recommended settings (static deploy)
 
 - Base directory: *(leave empty)*
-- Build command: *(leave empty for static deploy)*
+- Build command: *(leave empty)*
 - Publish directory: `.`
+
+### Optional settings (if you prefer running npm build)
+
+- Base directory: *(leave empty)*
+- Build command: `npm run build`
+- Publish directory: `.`
+
+`netlify.toml` already publishes the repository root and redirects `/` to `login.html`.
