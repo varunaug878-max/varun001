@@ -37,11 +37,11 @@ Then open:
 
 This app is a static site and does not require a bundler build.
 
-- `package.json` includes a no-op `build` script so `npm run build` succeeds on Netlify.
 - `netlify.toml` publishes the repository root (`.`) and redirects `/` to `login.html`.
+- No build command is required because this is a plain static HTML/CSS/JS site.
 
 If your Netlify UI has old settings, update them to:
 
 - Base directory: *(leave empty)*
-- Build command: `npm run build`
+- Build command: *(leave empty for static deploy)*
 - Publish directory: `.`
