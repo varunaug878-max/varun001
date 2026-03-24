@@ -32,3 +32,16 @@ python3 -m http.server 5500
 Then open:
 
 - <http://localhost:5500/login.html>
+
+## Netlify Deployment
+
+This app is a static site and does not require a bundler build.
+
+- `package.json` includes a no-op `build` script so `npm run build` succeeds on Netlify.
+- `netlify.toml` publishes the repository root (`.`) and redirects `/` to `login.html`.
+
+If your Netlify UI has old settings, update them to:
+
+- Base directory: *(leave empty)*
+- Build command: `npm run build`
+- Publish directory: `.`

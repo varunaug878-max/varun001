@@ -1,0 +1,10 @@
+{
+  "name": "monthly-expense-tracker-static",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static monthly expense tracker deployed on Netlify",
+  "scripts": {
+    "build": "echo 'Static site: no build step required'",
+    "start": "python3 -m http.server 5500"
+  }
+}
