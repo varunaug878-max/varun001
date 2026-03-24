@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker - Payments</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h2>Payment List</h2>
+      <div class="topbar-actions">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="payment-form.html">Add Payment</a>
+        <button id="logoutBtn" class="danger-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <div class="filters">
+          <select id="filterCategory">
+            <option value="">All Categories</option>
+            <option>Rent</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Bills</option>
+            <option>Shopping</option>
+            <option>Other</option>
+          </select>
+
+          <select id="filterStatus">
+            <option value="">All Status</option>
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+          </select>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="paymentTableBody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/payments.js"></script>
+  </body>
+</html>
