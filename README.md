@@ -1,24 +1,34 @@
-# GymFlow
+# Monthly Expense Tracker (LocalStorage)
 
-A modern, responsive workout tracking website built with React + Tailwind CSS.
-
-## Pages
-- Home
-- Workout Tracker
-- Progress Dashboard
-- Login / Signup
+A minimal black-themed monthly expense tracker website built with HTML, CSS, and JavaScript.
 
 ## Features
-- Simple login/signup flow (local storage based)
-- Save workout sessions
-- Weekly progress chart
-- Mobile responsive dark minimalist UI with smooth transitions
 
-## Run locally
-Because this project uses browser ESM/CDN dependencies, you can run it with any static server:
+- Multi-user signup/login using LocalStorage
+- Separate user data by account
+- Monthly budget tracking
+- Add/edit/delete payments
+- Filter payments by category and paid/unpaid status
+- Dashboard with total budget, spent amount, remaining amount, and category breakdown
+
+## Pages
+
+- `login.html`
+- `signup.html`
+- `dashboard.html`
+- `payments.html`
+- `payment-form.html`
+- `budget.html`
+- `settings.html`
+
+## Run
+
+Use any static server, for example:
 
 ```bash
-python3 -m http.server 4173
+python3 -m http.server 5500
 ```
 
-Then open <http://localhost:4173>.
+Then open:
+
+- <http://localhost:5500/login.html>
